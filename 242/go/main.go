@@ -5,25 +5,17 @@ import (
 )
 
 func isAnagram(s string, t string) bool {
-	if len(s) != len(t) {
-		return false
+	result := [26]int{}
+
+	for _, v := range s {
+		result[v-'a']++
 	}
 
-	result1 := make(map[byte]int)
-	result2 := make(map[byte]int)
-
-	for i := range s {
-		result1[s[i]]++
-		result2[t[i]]++
+	for _, v := range t {
+		result[v-'a']--
 	}
 
-	for k, v := range result1 {
-		if v != result2[k] {
-			return false
-		}
-	}
-
-	return true
+	return result == [26]int{}
 }
 
 func main() {
